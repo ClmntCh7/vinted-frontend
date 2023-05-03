@@ -1,0 +1,38 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+header {
+  height: 120px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+}
+
+.Header-logo {
+  border: 1px solid red;
+  flex: 1;
+  height: 100%;
+}
+
+.Header-search {
+  border: 1px solid green;
+  flex: 2;
+  height: 100%;
+}
+
+.Header-button {
+  border: 1px solid orange;
+  flex: 1;
+  height: 100%;
+}
+
+main {
+  border: 1px solid violet;
+}
+
+.Hero {
+  height: 40vh;
+  background-color: rosybrown;
+}
