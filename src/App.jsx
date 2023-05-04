@@ -1,3 +1,4 @@
+import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -5,9 +6,11 @@ import {
   useRoutes,
 } from "react-router-dom";
 
-import "./App.css";
+// Pages
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
+
+// Components
 import Header from "./components/Header";
 
 function App() {
@@ -16,7 +19,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/offer" element={<Offer />} />
+        <Route path="/offer/:id" element={<Offer />} />
       </Routes>
     </Router>
   );

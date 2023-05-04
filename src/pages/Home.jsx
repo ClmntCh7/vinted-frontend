@@ -18,11 +18,13 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
+  // console.log(data);
 
-  console.log(data);
-  // console.log(data.offers);
-
-  return (
+  return loading ? (
+    <div className="container">
+      <span>En cours de chargement... </span>
+    </div>
+  ) : (
     <div className="container">
       <main>
         <Hero />
