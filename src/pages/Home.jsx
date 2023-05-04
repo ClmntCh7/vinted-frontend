@@ -8,17 +8,20 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const response = await axios.get(
-      "https://lereacteur-vinted-api.herokuapp.com/offers"
-    );
-    setData(response.data);
-    setLoading(false);
+    try {
+      const response = await axios.get(
+        "https://lereacteur-vinted-api.herokuapp.com/offers"
+      );
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getData();
   }, []);
-  // console.log(data);
 
   return loading ? (
     <div className="container">
