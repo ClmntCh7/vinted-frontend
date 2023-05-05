@@ -7,6 +7,7 @@ const Header = ({ token, setToken, visible, setVisible, setModalToggle }) => {
     Cookies.remove("token");
     setToken(null);
   };
+  const handleSearch = () => {};
   return (
     <div className="container">
       <header>
@@ -17,7 +18,13 @@ const Header = ({ token, setToken, visible, setVisible, setModalToggle }) => {
         </div>
         <div className="Header-search">
           <div>
-            <input type="search" placeholder="Rechercher des articles" />
+            <input
+              type="search"
+              placeholder="Rechercher des articles"
+              onChange={handleSearch}
+              name="search"
+              // value={}
+            />
           </div>
         </div>
         <div className="Header-button">

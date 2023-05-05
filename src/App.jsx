@@ -33,14 +33,6 @@ function App() {
             element={<Home token={token} setToken={setToken} />}
           />
           <Route path="/offer/:id" element={<Offer />} />
-          {/* <Route
-            path="/signup"
-            element={<SignUp token={token} setToken={setToken} />}
-          /> */}
-          {/* <Route
-          path="/login"
-          element={<Login token={token} setToken={setToken} />}
-        /> */}
         </Routes>
       </Router>
       {visible && (

@@ -4,14 +4,9 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import handleErrors from "../utils/handleErrors";
 
-const Modal = ({
-  setVisible,
-  token,
-  setToken,
-  modalToggle,
-  //   setModalToggle
-}) => {
+const Modal = ({ setVisible, token, setToken, modalToggle }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,22 +25,29 @@ const Modal = ({
           password: password,
         }
       );
-
       setToken(response.data.token);
       setVisible(false);
-      if (token) {
-        Cookies.set("token", token, { expires: 1 / 24 });
+
+      if (response.data.token) {
+        Cookies.set("token", response.data.token, { expires: 1 / 24 });
         <Navigate to="/" />;
       }
     } catch (error) {
-      console.log("ERROR.MESSAGE ", error.message);
-      if (error.response.status === 509) {
-        setErrorMessage(
-          "Cet email est déjà utilisé, veuillez en choisir un autre."
-        );
-      } else if (error.response.message === "Missing Parameters") {
-        setErrorMessage("Veulliez remplir tous les champs");
-      }
+      // console.log("ERROR.MESSAGE ", error.response.data.message);
+      // console.log("ERROR ", error);
+      // if (error.response.status === 509) {
+      //   setErrorMessage(
+      //     "Cet email est déjà utilisé, veuillez en choisir un autre."
+      //   );
+      // } else if (error.response.data.message === "Missing Parameters") {
+      //   setErrorMessage("Veulliez remplir tous les champs");
+      // }
+      handleErrors.handleErrors(
+        error.response.status,
+        error.response.data.message,
+        setErrorMessage,
+        errorMessage
+      );
     }
   };
 
@@ -66,8 +68,8 @@ const Modal = ({
 
       setToken(response.data.token);
       setVisible(false);
-      if (token) {
-        Cookies.set("token", token, { expires: 1 / 24 });
+      if (response.data.token) {
+        Cookies.set("token", response.data.token, { expires: 1 / 24 });
         <Navigate to="/" />;
       }
     } catch (error) {
@@ -92,17 +94,6 @@ const Modal = ({
 
   return (
     <div className="Modal-root">
-      {modalToggle === 2 ? (
-        <Login
-          setVisible={setVisible}
-          loginReq={loginReq}
-          handleEmail={handleEmail}
-          email={email}
-          handlePassword={handlePassword}
-          password={password}
-          errorMessage={errorMessage}
-        />
-      ) : null}
       {modalToggle === 1 ? (
         <SignUp
           setVisible={setVisible}
@@ -120,40 +111,17 @@ const Modal = ({
           errorMessage={errorMessage}
         />
       ) : null}
-
-      {/* <div className="Form-container">
-        <button
-          onClick={() => {
-            setVisible(false);
-          }}
-        >
-          X
-        </button>
-        <p>Se connecter</p>
-        <form onSubmit={sendData}>
-          <label htmlFor="email">
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              onChange={handleEmail}
-              value={email}
-            />
-          </label>
-          <label htmlFor="password">
-            <input
-              id="password"
-              type="password"
-              placeholder="Mot de passe"
-              onChange={handlePassword}
-              value={password}
-            />
-          </label>
-          <button type="submit">Se connecter</button>
-        </form>
-      </div> */}
-      {/* {token && <Navigate to="/" />} */}
+      {modalToggle === 2 ? (
+        <Login
+          setVisible={setVisible}
+          loginReq={loginReq}
+          handleEmail={handleEmail}
+          email={email}
+          handlePassword={handlePassword}
+          password={password}
+          errorMessage={errorMessage}
+        />
+      ) : null}
     </div>
   );
 };
