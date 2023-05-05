@@ -1,39 +1,58 @@
 import "./App.css";
 import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useRoutes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Pages
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
 
 // Components
 import Header from "./components/Header";
+import Modal from "./components/Modal";
 
 function App() {
   const [token, setToken] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [modalToggle, setModalToggle] = useState(0);
+
   return (
-    <Router>
-      <Header token={token} setToken={setToken} />
-      <Routes>
-        <Route path="/" element={<Home token={token} setToken={setToken} />} />
-        <Route path="/offer/:id" element={<Offer />} />
-        <Route
-          path="/signup"
-          element={<SignUp token={token} setToken={setToken} />}
+    <div className="App">
+      <Router>
+        <Header
+          token={token}
+          setToken={setToken}
+          visible={visible}
+          setVisible={setVisible}
+          modalToggle={modalToggle}
+          setModalToggle={setModalToggle}
         />
-        <Route
+
+        <Routes>
+          <Route
+            path="/"
+            element={<Home token={token} setToken={setToken} />}
+          />
+          <Route path="/offer/:id" element={<Offer />} />
+          {/* <Route
+            path="/signup"
+            element={<SignUp token={token} setToken={setToken} />}
+          /> */}
+          {/* <Route
           path="/login"
           element={<Login token={token} setToken={setToken} />}
+        /> */}
+        </Routes>
+      </Router>
+      {visible && (
+        <Modal
+          setVisible={setVisible}
+          token={token}
+          setToken={setToken}
+          modalToggle={modalToggle}
+          // setModalToggle={setModalToggle}
         />
-      </Routes>
-    </Router>
+      )}
+    </div>
   );
 }
 

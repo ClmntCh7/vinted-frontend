@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import Cookies from "js-cookie";
 
-const Header = ({ token, setToken }) => {
+const Header = ({ token, setToken, visible, setVisible, setModalToggle }) => {
   const removeCookie = () => {
     Cookies.remove("token");
+    setToken(null);
   };
   return (
     <div className="container">
@@ -26,12 +27,23 @@ const Header = ({ token, setToken }) => {
             </div>
           ) : (
             <div>
-              <Link to="/signup">
-                <button>S'inscrire</button>
-              </Link>
-              <Link to="/login">
-                <button>Se connecter</button>
-              </Link>
+              <button
+                onClick={() => {
+                  setVisible(!visible);
+                  setModalToggle(1);
+                }}
+              >
+                S'inscrire
+              </button>
+              <button
+                id="login"
+                onClick={(e) => {
+                  setVisible(!visible);
+                  setModalToggle(2);
+                }}
+              >
+                Se connecter
+              </button>
             </div>
           )}
           <div>
