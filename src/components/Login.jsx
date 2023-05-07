@@ -1,11 +1,13 @@
 const Login = ({
   setVisible,
+  visible,
   loginReq,
   handleEmail,
   email,
   handlePassword,
   password,
   errorMessage,
+  setModalToggle,
 }) => {
   return (
     <div className="Form-container">
@@ -40,6 +42,13 @@ const Login = ({
         <p>{errorMessage}</p>
         <button type="submit">Se connecter</button>
       </form>
+      <button
+        onClick={() => {
+          setModalToggle(1);
+        }}
+      >
+        Pas encore de compte ? Inscris-toi !
+      </button>
     </div>
   );
 };

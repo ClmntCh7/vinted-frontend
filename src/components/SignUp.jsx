@@ -9,6 +9,7 @@ const SignUp = ({
   username,
   handleNewsletter,
   errorMessage,
+  setModalToggle,
 }) => {
   return (
     <div className="Form-container">
@@ -60,10 +61,17 @@ const SignUp = ({
             Conditions et Politique de Confidentialité de Vinted. Je confirme
             avoir au moins 18 ans.
           </p>
-          <p>{errorMessage}</p>
         </div>
+        <p>{errorMessage}</p>
         <button type="submit">S'inscrire</button>
       </form>
+      <button
+        onClick={() => {
+          setModalToggle(2);
+        }}
+      >
+        Tu as déjà un compte ? Connecte-toi !
+      </button>
     </div>
   );
 };

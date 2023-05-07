@@ -6,7 +6,6 @@ const Offers = ({ data }) => {
     <section className="Offers">
       {data.map((elem) => {
         const { account } = elem.owner;
-        // console.log(elem);
         return <OfferCard key={elem._id} elem={elem} account={account} />;
       })}
     </section>

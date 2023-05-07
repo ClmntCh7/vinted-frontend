@@ -5,13 +5,22 @@ import { Navigate } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import handleErrors from "../utils/handleErrors";
+// import avatar from "../assets/avatar-user.jpg";
 
-const Modal = ({ setVisible, token, setToken, modalToggle }) => {
+const Modal = ({
+  setVisible,
+  visible,
+  token,
+  setToken,
+  modalToggle,
+  setModalToggle,
+  errorMessage,
+  setErrorMessage,
+}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   //   LOGIN
   const loginReq = async (e) => {
@@ -19,7 +28,7 @@ const Modal = ({ setVisible, token, setToken, modalToggle }) => {
     setErrorMessage("");
     try {
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/login",
+        "https://site--vinted-backend--m4snx7ydrpgs.code.run/user/login",
         {
           email: email,
           password: password,
@@ -33,21 +42,7 @@ const Modal = ({ setVisible, token, setToken, modalToggle }) => {
         <Navigate to="/" />;
       }
     } catch (error) {
-      // console.log("ERROR.MESSAGE ", error.response.data.message);
-      // console.log("ERROR ", error);
-      // if (error.response.status === 509) {
-      //   setErrorMessage(
-      //     "Cet email est déjà utilisé, veuillez en choisir un autre."
-      //   );
-      // } else if (error.response.data.message === "Missing Parameters") {
-      //   setErrorMessage("Veulliez remplir tous les champs");
-      // }
-      handleErrors.handleErrors(
-        error.response.status,
-        error.response.data.message,
-        setErrorMessage,
-        errorMessage
-      );
+      handleErrors(error, setErrorMessage);
     }
   };
 
@@ -57,12 +52,13 @@ const Modal = ({ setVisible, token, setToken, modalToggle }) => {
     setErrorMessage("");
     try {
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        "https://site--vinted-backend--m4snx7ydrpgs.code.run/user/signup",
         {
           username: username,
           email: email,
           password: password,
           newsletter: newsletter,
+          // avatar: avatar,
         }
       );
 
@@ -73,7 +69,7 @@ const Modal = ({ setVisible, token, setToken, modalToggle }) => {
         <Navigate to="/" />;
       }
     } catch (error) {
-      console.log("ERROR.MESSAGE ", error.message);
+      handleErrors(error, setErrorMessage);
     }
   };
   const handleUsername = (e) => {
@@ -109,17 +105,20 @@ const Modal = ({ setVisible, token, setToken, modalToggle }) => {
           token={token}
           setToken={setToken}
           errorMessage={errorMessage}
+          setModalToggle={setModalToggle}
         />
       ) : null}
       {modalToggle === 2 ? (
         <Login
           setVisible={setVisible}
+          visible={visible}
           loginReq={loginReq}
           handleEmail={handleEmail}
           email={email}
           handlePassword={handlePassword}
           password={password}
           errorMessage={errorMessage}
+          setModalToggle={setModalToggle}
         />
       ) : null}
     </div>
