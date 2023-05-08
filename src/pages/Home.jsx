@@ -51,7 +51,7 @@ const Home = ({
         setData(response.data.message);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log("ERROR", error);
         handleErrors(error, setErrorMessage);
       }
     };

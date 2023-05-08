@@ -1,6 +1,5 @@
 const Login = ({
   setVisible,
-  visible,
   loginReq,
   handleEmail,
   email,
@@ -8,7 +7,6 @@ const Login = ({
   password,
   errorMessage,
   setModalToggle,
-  token,
 }) => {
   return (
     <div className="Form-container">
