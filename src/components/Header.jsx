@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import Cookies from "js-cookie";
 import { Range } from "react-range";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = ({
   token,
@@ -22,6 +22,8 @@ const Header = ({
     setToken(null);
   };
 
+  const location = useLocation();
+
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -35,7 +37,7 @@ const Header = ({
   const handlePriceRange = (values) => {
     setValues(values);
   };
-  console.log(token);
+  // console.log(token);
 
   return (
     <div className="container">
@@ -107,7 +109,14 @@ const Header = ({
         <div className="Header-button">
           {token ? (
             <div>
-              <button onClick={removeCookie}>Se Deconnecter</button>
+              <button
+                onClick={() => {
+                  removeCookie();
+                  navigate("/");
+                }}
+              >
+                Se Deconnecter
+              </button>
             </div>
           ) : (
             <div>
@@ -140,7 +149,7 @@ const Header = ({
                 onClick={() => {
                   setVisible(!visible);
                   setModalToggle(2);
-                  navigate("/offer/publish");
+                  location.state = { from: "/offer/publish" };
                 }}
               >
                 Vends tes articles

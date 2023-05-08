@@ -13,7 +13,10 @@ const OfferCard = ({ elem, account }) => {
           </div>
         </div>
         <div className="OfferCard-pict">
-          <img src={elem.product_image.secure_url} alt="" />
+          <img
+            src={elem.product_image[0].secure_url}
+            alt="product posted by users"
+          />
         </div>
         <div className="OfferCard-details">
           <span>{elem.product_price}€</span>

@@ -11,6 +11,10 @@ const Home = ({
   setFilter,
   sort,
   values,
+  visible,
+  setVisible,
+  setModalToggle,
+  token,
 }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -29,7 +33,7 @@ const Home = ({
     return filter;
   });
 
-  console.log(filters);
+  // console.log(filters);
 
   let path = "";
   for (let i = 0; i < filters.length; i++) {
@@ -45,9 +49,10 @@ const Home = ({
     const getData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers/${path}`
+          `https://site--vinted-backend--m4snx7ydrpgs.code.run/offers/${path}`
         );
-        setData(response.data);
+        setData(response.data.message);
+        console.log("HOME RESP", response.data.message.offers);
         setLoading(false);
       } catch (error) {
         handleErrors(error, setErrorMessage);
@@ -65,7 +70,12 @@ const Home = ({
   ) : (
     <div className="container">
       <main>
-        <Hero />
+        <Hero
+          visible={visible}
+          setVisible={setVisible}
+          setModalToggle={setModalToggle}
+          token={token}
+        />
         <Offers data={data.offers} keyword={keyword} />
       </main>
     </div>

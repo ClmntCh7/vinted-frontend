@@ -10,6 +10,7 @@ const SignUp = ({
   handleNewsletter,
   errorMessage,
   setModalToggle,
+  setAvatar,
 }) => {
   return (
     <div className="Form-container">
@@ -22,6 +23,15 @@ const SignUp = ({
       </button>
       <p>S'inscrire</p>
       <form onSubmit={(e) => signupReq(e)}>
+        <label htmlFor="title">
+          Choisissez un Avatar
+          <input
+            type="file"
+            onChange={(e) => {
+              setAvatar(e.target.files[0]);
+            }}
+          />
+        </label>
         <label htmlFor="username">
           <input
             id="username"

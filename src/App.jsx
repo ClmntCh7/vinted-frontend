@@ -21,8 +21,8 @@ function App() {
   const [sort, setSort] = useState(false);
   const initialKeyword = useRef(keyword);
   const [values, setValues] = useState([10, 100]);
-
   const [errorMessage, setErrorMessage] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   return (
     <div className="App">
@@ -58,6 +58,9 @@ function App() {
                 initialKeyword={initialKeyword}
                 values={values}
                 setValues={setValues}
+                visible={visible}
+                setVisible={setVisible}
+                setModalToggle={setModalToggle}
               />
             }
           />
@@ -69,19 +72,21 @@ function App() {
             }
           />
         </Routes>
+        {visible && (
+          <Modal
+            setVisible={setVisible}
+            visible={visible}
+            token={token}
+            setToken={setToken}
+            modalToggle={modalToggle}
+            setModalToggle={setModalToggle}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+            avatar={avatar}
+            setAvatar={setAvatar}
+          />
+        )}
       </Router>
-      {visible && (
-        <Modal
-          setVisible={setVisible}
-          visible={visible}
-          token={token}
-          setToken={setToken}
-          modalToggle={modalToggle}
-          setModalToggle={setModalToggle}
-          errorMessage={errorMessage}
-          setErrorMessage={setErrorMessage}
-        />
-      )}
     </div>
   );
 }

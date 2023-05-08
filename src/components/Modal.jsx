@@ -1,11 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import handleErrors from "../utils/handleErrors";
-// import avatar from "../assets/avatar-user.jpg";
 
 const Modal = ({
   setVisible,
@@ -16,7 +15,12 @@ const Modal = ({
   setModalToggle,
   errorMessage,
   setErrorMessage,
+  avatar,
+  setAvatar,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +29,6 @@ const Modal = ({
   //   LOGIN
   const loginReq = async (e) => {
     e.preventDefault();
-    console.log("EVENT", e);
     setErrorMessage("");
     try {
       const response = await axios.post(
@@ -38,9 +41,14 @@ const Modal = ({
       setToken(response.data.token);
       setVisible(false);
 
+      if (!location.state) {
+        navigate("/");
+      } else {
+        navigate(location.state.from);
+      }
+
       if (response.data.token) {
         Cookies.set("token", response.data.token, { expires: 1 / 24 });
-        <Navigate to="/" />;
       }
     } catch (error) {
       handleErrors(error, setErrorMessage);
@@ -49,18 +57,19 @@ const Modal = ({
 
   //   SIGNUP
   const signupReq = async (e) => {
-    e.preventDefault();
-    setErrorMessage("");
     try {
+      e.preventDefault();
+      setErrorMessage("");
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("newsletter", newsletter);
+      formData.append("avatar", avatar);
+
       const response = await axios.post(
         "https://site--vinted-backend--m4snx7ydrpgs.code.run/user/signup",
-        {
-          username: username,
-          email: email,
-          password: password,
-          newsletter: newsletter,
-          // avatar: avatar,
-        }
+        formData
       );
 
       setToken(response.data.token);
@@ -107,6 +116,7 @@ const Modal = ({
           setToken={setToken}
           errorMessage={errorMessage}
           setModalToggle={setModalToggle}
+          setAvatar={setAvatar}
         />
       ) : null}
       {modalToggle === 2 ? (

@@ -7,14 +7,17 @@ const Offer = () => {
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          `https://site--vinted-backend--m4snx7ydrpgs.code.run/offer/${id}`
+          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
         );
-        setData(response.data);
+        setData(response.data.message);
+
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -33,7 +36,7 @@ const Offer = () => {
         <div className="container">
           <section className="OfferPage-container">
             <div className="OfferPage-pict">
-              <img src={data.product_image.secure_url} alt="" />
+              <img src={data.product_image[0].secure_url} alt="" />
             </div>
             <div className="OfferPage-details">
               <div className="OfferPage-productInfos">

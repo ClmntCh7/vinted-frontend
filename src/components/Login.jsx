@@ -1,3 +1,6 @@
+import { Navigate, useNavigate } from "react-router-dom";
+
+console.log("ici", () => useNavigate);
 const Login = ({
   setVisible,
   visible,
@@ -20,7 +23,11 @@ const Login = ({
         X
       </button>
       <p>Se connecter</p>
-      <form onSubmit={(e) => loginReq(e)}>
+      <form
+        onSubmit={(e) => {
+          loginReq(e);
+        }}
+      >
         <label htmlFor="email">
           <input
             id="email"
