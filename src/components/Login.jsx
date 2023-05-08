@@ -1,6 +1,3 @@
-import { Navigate, useNavigate } from "react-router-dom";
-
-console.log("ici", () => useNavigate);
 const Login = ({
   setVisible,
   visible,

@@ -37,7 +37,6 @@ const Header = ({
   const handlePriceRange = (values) => {
     setValues(values);
   };
-  // console.log(token);
 
   return (
     <div className="container">

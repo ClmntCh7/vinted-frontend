@@ -7,17 +7,14 @@ const Offer = () => {
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await axios.get(
           `https://site--vinted-backend--m4snx7ydrpgs.code.run/offer/${id}`
-          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
         );
         setData(response.data.message);
-
         setLoading(false);
       } catch (error) {
         console.log(error);

@@ -1,7 +1,6 @@
 import OfferCard from "./OfferCard";
 
 const Offers = ({ data }) => {
-  console.log(data);
   return (
     <section className="Offers">
       {data.map((elem) => {

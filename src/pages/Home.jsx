@@ -18,50 +18,46 @@ const Home = ({
 }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
-  const newFilters = { ...filter };
-  setFilter((newFilters.title = keyword));
-  setFilter((newFilters.sort = sort));
-  setFilter((newFilters.priceMin = values[0]));
-  setFilter((newFilters.priceMax = values[1]));
-
-  sort ? (newFilters.sort = "price-desc") : (newFilters.sort = "price-asc");
-
-  const entries = Object.entries(newFilters);
-  const filters = entries.map((entry) => {
-    let [key, value] = entry;
-    const filter = `${key}=${value}`;
-    return filter;
-  });
-
-  // console.log(filters);
-
-  let path = "";
-  for (let i = 0; i < filters.length; i++) {
-    if (i === 0) {
-      path = "?" + filters[0];
-    }
-    if (i > 0) {
-      path += "&&" + filters[i];
-    }
-  }
 
   useEffect(() => {
     const getData = async () => {
       try {
+        const newFilters = { ...filter };
+        setFilter((newFilters.title = keyword));
+        setFilter((newFilters.sort = sort));
+        setFilter((newFilters.priceMin = values[0]));
+        setFilter((newFilters.priceMax = values[1]));
+        sort
+          ? (newFilters.sort = "price-desc")
+          : (newFilters.sort = "price-asc");
+        const entries = Object.entries(newFilters);
+        const filters = entries.map((entry) => {
+          let [key, value] = entry;
+          const filter = `${key}=${value}`;
+          return filter;
+        });
+        let path = "";
+        for (let i = 0; i < filters.length; i++) {
+          if (i === 0) {
+            path = "?" + filters[0];
+          }
+          if (i > 0) {
+            path += "&&" + filters[i];
+          }
+        }
         const response = await axios.get(
           `https://site--vinted-backend--m4snx7ydrpgs.code.run/offers/${path}`
         );
         setData(response.data.message);
-        console.log("HOME RESP", response.data.message.offers);
         setLoading(false);
       } catch (error) {
+        console.log(error);
         handleErrors(error, setErrorMessage);
       }
     };
-    console.log(path);
 
     getData();
-  }, [path, setErrorMessage]);
+  }, [keyword, sort, setErrorMessage, filter, setFilter, values]);
 
   return loading ? (
     <div className="container">

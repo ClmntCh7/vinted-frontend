@@ -16,6 +16,7 @@ const PublishOffer = ({ setErrorMessage, token }) => {
 
   const postOffer = async (e) => {
     try {
+      console.log(token);
       e.preventDefault();
       const config = {
         headers: {
