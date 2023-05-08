@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import Cookies from "js-cookie";
-import { useState } from "react";
 import { Range } from "react-range";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({
   token,
@@ -22,6 +22,8 @@ const Header = ({
     setToken(null);
   };
 
+  const navigate = useNavigate();
+
   const handleSearch = (e) => {
     setKeyword(e.target.value);
   };
@@ -33,6 +35,7 @@ const Header = ({
   const handlePriceRange = (values) => {
     setValues(values);
   };
+  console.log(token);
 
   return (
     <div className="container">
@@ -118,7 +121,7 @@ const Header = ({
               </button>
               <button
                 id="login"
-                onClick={(e) => {
+                onClick={() => {
                   setVisible(!visible);
                   setModalToggle(2);
                 }}
@@ -128,7 +131,21 @@ const Header = ({
             </div>
           )}
           <div>
-            <button>Vends tes articles</button>
+            {token ? (
+              <Link to="/offer/publish">
+                <button>Vends tes articles</button>
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  setVisible(!visible);
+                  setModalToggle(2);
+                  navigate("/offer/publish");
+                }}
+              >
+                Vends tes articles
+              </button>
+            )}
           </div>
         </div>
       </header>

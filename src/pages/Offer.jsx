@@ -8,19 +8,18 @@ const Offer = () => {
 
   const { id } = useParams();
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
-      );
-      setData(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+        );
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getData();
   }, [id]);
 

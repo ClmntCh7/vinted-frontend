@@ -20,7 +20,7 @@ const Home = ({
   setFilter((newFilters.priceMin = values[0]));
   setFilter((newFilters.priceMax = values[1]));
 
-  sort ? (newFilters.sort = "price-asc") : (newFilters.sort = "price-desc");
+  sort ? (newFilters.sort = "price-desc") : (newFilters.sort = "price-asc");
 
   const entries = Object.entries(newFilters);
   const filters = entries.map((entry) => {
@@ -41,23 +41,22 @@ const Home = ({
     }
   }
 
-  console.log(path);
-
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `https://lereacteur-vinted-api.herokuapp.com/offers/${path}`
-      );
-      setData(response.data);
-      setLoading(false);
-    } catch (error) {
-      handleErrors(error, setErrorMessage);
-    }
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          `https://lereacteur-vinted-api.herokuapp.com/offers/${path}`
+        );
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        handleErrors(error, setErrorMessage);
+      }
+    };
+    console.log(path);
+
     getData();
-  }, [path]);
+  }, [path, setErrorMessage]);
 
   return loading ? (
     <div className="container">

@@ -25,6 +25,7 @@ const Modal = ({
   //   LOGIN
   const loginReq = async (e) => {
     e.preventDefault();
+    console.log("EVENT", e);
     setErrorMessage("");
     try {
       const response = await axios.post(
@@ -110,6 +111,7 @@ const Modal = ({
       ) : null}
       {modalToggle === 2 ? (
         <Login
+          token={token}
           setVisible={setVisible}
           visible={visible}
           loginReq={loginReq}

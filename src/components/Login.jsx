@@ -8,6 +8,7 @@ const Login = ({
   password,
   errorMessage,
   setModalToggle,
+  token,
 }) => {
   return (
     <div className="Form-container">

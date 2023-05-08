@@ -9,6 +9,7 @@ import Offer from "./pages/Offer";
 // Components
 import Header from "./components/Header";
 import Modal from "./components/Modal";
+import PublishOffer from "./pages/PublishOffer";
 
 function App() {
   // States:
@@ -61,6 +62,12 @@ function App() {
             }
           />
           <Route path="/offer/:id" element={<Offer />} />
+          <Route
+            path="/offer/publish"
+            element={
+              <PublishOffer setErrorMessage={setErrorMessage} token={token} />
+            }
+          />
         </Routes>
       </Router>
       {visible && (
