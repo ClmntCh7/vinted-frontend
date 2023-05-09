@@ -20,8 +20,7 @@ const PublishOffer = ({ setErrorMessage, token }) => {
       e.preventDefault();
       const config = {
         headers: {
-          //   authorization: `Bearer ${token}`,
-          authorization: `Bearer TuPPCPTEKJNZZLH1FOFGKLoOSNge6hbqf16lDKNY0ap9hedy6sYCIhLQMaeAnK8B`,
+          authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       };
