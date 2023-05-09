@@ -33,7 +33,10 @@ const Offer = () => {
         <div className="container">
           <section className="OfferPage-container">
             <div className="OfferPage-pict">
-              <img src={data.product_image[0]?.secure_url} alt="" />
+              <img
+                src={data.product_image && data.product_image[0].secure_url}
+                alt=""
+              />
             </div>
             <div className="OfferPage-details">
               <div className="OfferPage-productInfos">
