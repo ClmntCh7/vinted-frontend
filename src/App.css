@@ -42,6 +42,17 @@ header {
   height: 100%;
 }
 
+.Header-Range-thumbs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.Header-Range-labels {
+  position: absolute;
+  bottom: 20px;
+}
+
 /* ----  Home Page ---- */
 
 .Hero {

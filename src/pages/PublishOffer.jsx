@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import handleErrors from "../utils/handleErrors";
 
 const PublishOffer = ({ setErrorMessage, token }) => {
@@ -24,18 +23,19 @@ const PublishOffer = ({ setErrorMessage, token }) => {
           "Content-Type": "multipart/form-data",
         },
       };
+
       const formData = new FormData();
       formData.append("picture", picture);
-      formData.append("title", title);
-      formData.append("description", description);
+      formData.append("product_name", title);
+      formData.append("product_description", description);
       formData.append("brand", brand);
       formData.append("size", size);
       formData.append("condition", condition);
       formData.append("color", color);
-      formData.append("city", location);
-      formData.append("price", price);
+      formData.append("city_location", location);
+      formData.append("product_price", price);
       const response = axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        "https://site--vinted-backend--m4snx7ydrpgs.code.run/offer/publish",
         formData,
         config
       );

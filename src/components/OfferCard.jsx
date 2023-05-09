@@ -6,7 +6,7 @@ const OfferCard = ({ elem, account }) => {
       <article className="OfferCard">
         <div className="OfferCard-header">
           <div>
-            {account.avatar && <img src={account.avatar.secure_url} alt="" />}
+            {account.avatar && <img src={account?.avatar?.secure_url} alt="" />}
           </div>
           <div>
             <span>{account.username}</span>
@@ -14,7 +14,7 @@ const OfferCard = ({ elem, account }) => {
         </div>
         <div className="OfferCard-pict">
           <img
-            src={elem.product_image[0].secure_url}
+            src={elem.product_image[0]?.secure_url}
             alt="product posted by users"
           />
         </div>

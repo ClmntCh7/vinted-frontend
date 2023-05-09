@@ -10,11 +10,11 @@ const Home = ({
   filter,
   setFilter,
   sort,
-  values,
   visible,
   setVisible,
   setModalToggle,
   token,
+  finalPriceRange,
 }) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -25,8 +25,8 @@ const Home = ({
         const newFilters = { ...filter };
         setFilter((newFilters.title = keyword));
         setFilter((newFilters.sort = sort));
-        setFilter((newFilters.priceMin = values[0]));
-        setFilter((newFilters.priceMax = values[1]));
+        setFilter((newFilters.priceMin = finalPriceRange[0]));
+        setFilter((newFilters.priceMax = finalPriceRange[1]));
         sort
           ? (newFilters.sort = "price-desc")
           : (newFilters.sort = "price-asc");
@@ -57,7 +57,7 @@ const Home = ({
     };
 
     getData();
-  }, [keyword, sort, setErrorMessage, filter, setFilter, values]);
+  }, [keyword, sort, setErrorMessage, filter, setFilter, finalPriceRange]);
 
   return loading ? (
     <div className="container">

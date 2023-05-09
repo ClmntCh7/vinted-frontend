@@ -33,7 +33,7 @@ const Offer = () => {
         <div className="container">
           <section className="OfferPage-container">
             <div className="OfferPage-pict">
-              <img src={data.product_image[0].secure_url} alt="" />
+              <img src={data.product_image[0]?.secure_url} alt="" />
             </div>
             <div className="OfferPage-details">
               <div className="OfferPage-productInfos">
@@ -54,7 +54,10 @@ const Offer = () => {
                 <div className="OfferPage-userInfos">
                   <div>
                     {data.owner.account.avatar && (
-                      <img src={data.owner.account.avatar.secure_url} alt="" />
+                      <img
+                        src={data.owner.account?.avatar?.secure_url}
+                        alt=""
+                      />
                     )}
                   </div>
                   <div>

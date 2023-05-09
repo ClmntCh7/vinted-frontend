@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Cookies from "js-cookie";
 
 // Pages
 import Home from "./pages/Home";
@@ -21,8 +22,11 @@ function App() {
   const [sort, setSort] = useState(false);
   const initialKeyword = useRef(keyword);
   const [values, setValues] = useState([10, 100]);
+  const [finalPriceRange, setfinalPriceRange] = useState([10, 100]);
   const [errorMessage, setErrorMessage] = useState("");
   const [avatar, setAvatar] = useState("");
+
+  // console.log(Cookies.get("token"));
 
   return (
     <div className="App">
@@ -40,6 +44,7 @@ function App() {
           setSort={setSort}
           values={values}
           setValues={setValues}
+          setfinalPriceRange={setfinalPriceRange}
         />
 
         <Routes>
@@ -61,6 +66,7 @@ function App() {
                 visible={visible}
                 setVisible={setVisible}
                 setModalToggle={setModalToggle}
+                finalPriceRange={finalPriceRange}
               />
             }
           />

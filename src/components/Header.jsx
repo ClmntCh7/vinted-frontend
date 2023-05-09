@@ -3,6 +3,7 @@ import logo from "../assets/logo.svg";
 import Cookies from "js-cookie";
 import { Range } from "react-range";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const Header = ({
   token,
@@ -16,6 +17,7 @@ const Header = ({
   setSort,
   values,
   setValues,
+  setfinalPriceRange,
 }) => {
   const removeCookie = () => {
     Cookies.remove("token");
@@ -70,10 +72,13 @@ const Header = ({
             >
               <Range
                 step={1}
-                min={0}
+                min={1}
                 max={500}
                 values={values}
                 onChange={handlePriceRange}
+                onFinalChange={() => {
+                  setfinalPriceRange(values);
+                }}
                 renderTrack={({ props, children }) => (
                   <>
                     <div
@@ -89,8 +94,9 @@ const Header = ({
                     </div>
                   </>
                 )}
-                renderThumb={({ props }) => (
+                renderThumb={({ props, index }) => (
                   <div
+                    className="Header-Range-thumbs"
                     {...props}
                     style={{
                       ...props.style,
@@ -99,7 +105,9 @@ const Header = ({
                       borderRadius: "50px",
                       backgroundColor: "#2CB1BA",
                     }}
-                  ></div>
+                  >
+                    <span className="Header-Range-labels">{values[index]}</span>
+                  </div>
                 )}
               />
             </div>
