@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import handleErrors from "../utils/handleErrors";
+import { useNavigate } from "react-router-dom";
 
 const PublishOffer = ({ setErrorMessage, token }) => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ const PublishOffer = ({ setErrorMessage, token }) => {
   const [location, setLocation] = useState();
   const [price, setPrice] = useState();
   const [picture, setPicture] = useState();
+  const navigate = useNavigate();
 
   const postOffer = async (e) => {
     try {
@@ -38,6 +40,7 @@ const PublishOffer = ({ setErrorMessage, token }) => {
         formData,
         config
       );
+      navigate("/");
     } catch (error) {
       handleErrors(error, setErrorMessage);
     }
