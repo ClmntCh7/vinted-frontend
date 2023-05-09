@@ -15,7 +15,6 @@ const PublishOffer = ({ setErrorMessage, token }) => {
 
   const postOffer = async (e) => {
     try {
-      console.log(token);
       e.preventDefault();
       const config = {
         headers: {
@@ -34,13 +33,11 @@ const PublishOffer = ({ setErrorMessage, token }) => {
       formData.append("color", color);
       formData.append("city_location", location);
       formData.append("product_price", price);
-      const response = axios.post(
+      const response = await axios.post(
         "https://site--vinted-backend--m4snx7ydrpgs.code.run/offer/publish",
         formData,
         config
       );
-
-      console.log(response);
     } catch (error) {
       handleErrors(error, setErrorMessage);
     }
