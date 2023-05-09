@@ -17,11 +17,12 @@ const Modal = ({
   setErrorMessage,
   avatar,
   setAvatar,
+  username,
+  setUsername,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);

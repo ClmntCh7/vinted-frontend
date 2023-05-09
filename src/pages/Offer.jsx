@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 const Offer = () => {
   const [data, setData] = useState([]);
@@ -34,7 +35,7 @@ const Offer = () => {
           <section className="OfferPage-container">
             <div className="OfferPage-pict">
               <img
-                src={data.product_image && data.product_image[0].secure_url}
+                src={data.product_image && data.product_image[0]?.secure_url}
                 alt=""
               />
             </div>
@@ -68,7 +69,16 @@ const Offer = () => {
                   </div>
                 </div>
               </div>
-              <button>Acheter</button>
+              <Link
+                to={`/offer/${id}/payment`}
+                state={{
+                  offerId: id,
+                  title: data.product_name,
+                  amount: data.product_price,
+                }}
+              >
+                <button>Acheter</button>
+              </Link>
             </div>
           </section>
         </div>

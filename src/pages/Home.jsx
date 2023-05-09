@@ -64,7 +64,7 @@ const Home = ({
       <span>En cours de chargement... </span>
     </div>
   ) : (
-    <div className="container">
+    <div>
       <main>
         <Hero
           visible={visible}
@@ -72,7 +72,9 @@ const Home = ({
           setModalToggle={setModalToggle}
           token={token}
         />
-        <Offers data={data.offers} keyword={keyword} />
+        <div className="container">
+          <Offers data={data.offers} keyword={keyword} />
+        </div>
       </main>
     </div>
   );

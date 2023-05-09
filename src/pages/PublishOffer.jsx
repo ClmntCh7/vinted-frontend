@@ -40,6 +40,7 @@ const PublishOffer = ({ setErrorMessage, token }) => {
         formData,
         config
       );
+      console.log(response);
       navigate("/");
     } catch (error) {
       handleErrors(error, setErrorMessage);

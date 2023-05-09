@@ -20,7 +20,7 @@ const OfferCard = ({ elem, account }) => {
         </div>
         <div className="OfferCard-details">
           <span>{elem.product_price}€</span>
-          {elem.product_details.map((elem, index) => {
+          {elem.product_details.map((elem) => {
             return (
               <p key={elem._id}>
                 <span>{elem.TAILLE}</span>

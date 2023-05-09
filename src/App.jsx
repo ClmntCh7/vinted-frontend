@@ -1,11 +1,13 @@
 import "./App.css";
 import { useState, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Cookies from "js-cookie";
 
 // Pages
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
+import Payment from "./pages/Payment";
 
 // Components
 import Header from "./components/Header";
@@ -25,6 +27,7 @@ function App() {
   const [finalPriceRange, setfinalPriceRange] = useState([10, 100]);
   const [errorMessage, setErrorMessage] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState("");
 
   // console.log(Cookies.get("token"));
 
@@ -77,7 +80,12 @@ function App() {
               <PublishOffer setErrorMessage={setErrorMessage} token={token} />
             }
           />
+          <Route
+            path="/offer/:id/payment"
+            element={<Payment username={username} setUsername={setUsername} />}
+          />
         </Routes>
+
         {visible && (
           <Modal
             setVisible={setVisible}
@@ -90,6 +98,8 @@ function App() {
             setErrorMessage={setErrorMessage}
             avatar={avatar}
             setAvatar={setAvatar}
+            username={username}
+            setUsername={setUsername}
           />
         )}
       </Router>
