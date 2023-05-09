@@ -26,6 +26,7 @@ const SignUp = ({
         <label htmlFor="title">
           Choisissez un Avatar
           <input
+            required
             type="file"
             onChange={(e) => {
               setAvatar(e.target.files[0]);
